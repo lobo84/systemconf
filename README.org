@@ -1,0 +1,57 @@
+* fonts
+ pacman -S extra/adobe-source-code-pro-fonts
+ emacs is already configured to use the font
+* colors
+  download http://ethanschoonover.com/solarized
+** terminal:
+  copy Xresources from solarized to:
+  ~/.Xresources 
+
+** emacs
+   evertyhing should be checked in
+* wm
+** i3
+to startup i3 when xorg starts, edit ~/.xinitrc
+at the end of the file add:
+exec i3
+
+*** launcher
+could not get dmenu to work.
+Use bash run instead.
+Install with
+pacman -S bashrun
+
+edit ~/.i3/config and replace the dmenu line with:
+bindsym $mod+d exec bashrun
+
+*** i3bar
+To get the current spotify song playing change
+~/.i3/config
+
+these lines at bottom:
+bar {
+        status_command ~/.bin/my_i3status.sh
+}
+
+my_i3status.sh:
+#!/bin/sh
+# shell script to prepend i3status with more stuff
+
+i3status | while :
+do
+        read line
+        spot=$(xprop -name "Spotify Premium - Linux Preview" _NET_WM_ICON_NAME|cut -d "\"" -f 2|cut -b 11-|awk -
+F " w " '{print $1}')
+        echo "$spot | $line" || exit 1
+	done
+* laptop special keys
+** generate default keymapping:
+xbindkeys -d > ~/.xbindkeysrc
+add these lines:
+
+"amixer -c 0 set Master 5-"
+    XF86AudioLowerVolume
+
+"amixer -c 0 set Master 5+"
+    XF86AudioRaiseVolume
+    
