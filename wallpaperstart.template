@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=wallpaperCycler
+GenericName=wallpaperCycler
+Comment=changes wallpaper at each startup
+Exec=$scriptPath $arg
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
